@@ -16,7 +16,7 @@
 
 ## 关于 VueRouter 模拟实现的分析
 
-![image](https://s3.ax1x.com/2020/12/08/rpxYxf.png)
+![image](https://s3.ax1x.com/2020/12/10/rFKaTg.png)
 
 `Vue.use()` 的参数支持传入一个函数或对象。如果传入函数，`Vue.use()` 会调用这个函数。如果传入对象，`Vue.use()` 内部会调用这个对象的 `install` 方法。
 
