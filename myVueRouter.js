@@ -104,6 +104,7 @@ export default class VueRouter {
       // 监听浏览器前进后退触发的 popstate 事件，手动更改 current，触发更新组件视图
       window.addEventListener('popstate', () => {
         this.data.current = window.location.pathname
+        console.log('浏览器前进后退触发 popstate')
       })
     } else {
       // hash 模式
@@ -120,6 +121,6 @@ export default class VueRouter {
         this.data.current = window.location.hash.slice(1)
         console.log('hash 改变')
       })
-    }
+    } 
   }
 }

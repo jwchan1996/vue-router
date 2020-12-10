@@ -14,9 +14,9 @@
 - 监听 `popstate` 事件
 - 根据当前路由地址找到对应组件重新渲染
 
-## VueRouter 模拟实现-分析
+## 关于 VueRouter 模拟实现的分析
 
-![image](https://s3.ax1x.com/2020/12/08/rpxYxf.md.png)
+![image](https://s3.ax1x.com/2020/12/08/rpxYxf.png)
 
 `Vue.use()` 的参数支持传入一个函数或对象。如果传入函数，`Vue.use()` 会调用这个函数。如果传入对象，`Vue.use()` 内部会调用这个对象的 `install` 方法。
 
@@ -69,7 +69,7 @@ export default class VueRouter {
                 // 判断是 Vue 根实例还是 Vue 组件，组件不需要重复注入，第一次实例化 Vue 注入即可
                 if (this.$options && this.$options.router) {
                     // 只有 Vue 根实例的 $options 选项才有 router 属性
-                    _Vue.prototype.$router = this.$router.router
+                    _Vue.prototype.$router = this.$options.router
                 }
             }
         })
@@ -157,7 +157,7 @@ export default class VueRouter {
                 // 判断是 Vue 根实例还是 Vue 组件，组件不需要重复注入，第一次实例化 Vue 注入即可
                 if (this.$options && this.$options.router) {
                     // 只有 Vue 根实例的 $options 选项才有 router 属性
-                    _Vue.prototype.$router = this.$router.router
+                    _Vue.prototype.$router = this.$options.router
                     // 调用定义好的 init 初始化方法 
                     this.$options.router.init()
                 }
@@ -204,9 +204,7 @@ export default class VueRouter {
 
 如果是使用 `vue-cli` 创建出来的项目，默认是使用运行时版本，因为效率更高。上面自定义的 `VueRouter` 在使用时会报错，因为运行时 `Vue` 版本不支持 `template`。
 
-> 关于 Vue 的构建版本
-
-![image](https://s3.ax1x.com/2020/12/09/rPkpqI.md.png)
+### 关于 Vue 的构建版本
 
 - 运行时版本：不支持 `template` 模板，需要打包的时候提前编译
 - 完整版：包含运行时和编译器，体积比运行时版本大 `10K` 左右，程序运行的时候模板转换成 `render` 函数。
@@ -562,7 +560,6 @@ export default class VueRouter {
         this.data.current = window.location.hash.slice(1)
       })
     }
-    
   }
 }
 ```
